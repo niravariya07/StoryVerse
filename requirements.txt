@@ -1,0 +1,6 @@
+streamlit
+fitz
+faiss-cpu
+sentence-transformers
+openai
+langchain
