@@ -3,17 +3,6 @@ nltk.download('punkt')
 from nltk.tokenize import sent_tokenize
 
 def chunk_text(text, max_tokens=500, overlap=50):
-    """
-    Splits input text into chunks based on sentence boundaries, controlling for token limits and overlap.
-    
-    Parameters:
-    - text (str): The full input text (e.g., from a PDF).
-    - max_tokens (int): Maximum tokens per chunk (approximate, using word count).
-    - overlap (int): Number of tokens to overlap between chunks for context continuity.
-
-    Returns:
-    - List[str]: List of text chunks.
-    """
     sentences = sent_tokenize(text)
     chunks = []
     current_chunk = []
