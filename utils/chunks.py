@@ -12,10 +12,8 @@ def chunk_text(text, max_tokens=500, overlap=50):
         sentence_length = len(sentence.split())
 
         if current_length + sentence_length > max_tokens:
-            # Save current chunk
             chunks.append(" ".join(current_chunk))
 
-            # Overlap: take last few sentences
             overlap_tokens = []
             overlap_count = 0
             for sent in reversed(current_chunk):
@@ -30,7 +28,6 @@ def chunk_text(text, max_tokens=500, overlap=50):
         current_chunk.append(sentence)
         current_length += sentence_length
 
-    # Add final chunk
     if current_chunk:
         chunks.append(" ".join(current_chunk))
 
