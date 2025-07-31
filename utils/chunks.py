@@ -14,3 +14,5 @@ def chunk_text(text, model_name="all-MiniLM-L6-v2", max_tokens=512, overlap=50):
         chunk_text = tokenizer.decode(chunk_tokens, skip_special_tokens=True)
         chunks.append(chunk_text)
         start += max_tokens - overlap
+
+    return chunks
