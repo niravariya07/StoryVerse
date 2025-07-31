@@ -10,3 +10,5 @@ def load_faiss_index(index_path="faiss_index"):
     with open(f"{index_path}/chunks.pkl", "rb") as f:
         chunks = pickle.load(f)
     return index, chunks
+
+def retrieve_similar_chunks(query, k=3, index_path="faiss_index"):
