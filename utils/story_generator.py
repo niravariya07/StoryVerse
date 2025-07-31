@@ -14,3 +14,31 @@ def prompt_format(retrieved_chunks, genre):
         f"Story:"
     )
     return prompt
+
+def generate_story(retrieved_chunks, genre, model="gpt-3.5-turbo", temperature=0.8, max_tokens=800):
+    """
+    Use OpenAI's Chat API to generate a story.
+
+    Args:
+        retrieved_chunks (list): Relevant context from PDF.
+        genre (str): User-selected genre.
+        model (str): OpenAI model name.
+        temperature (float): Creativity level.
+        max_tokens (int): Length of output.
+
+    Returns:
+        str: The generated story.
+    """
+    prompt = prompt_format(retrieved_chunks, genre)
+
+    response = openai.ChatCompletion.create(
+        model=model,
+        messages=[
+            {"role": "system", "content": "You are a helpful and creative assistant."},
+            {"role": "user", "content": prompt}
+        ],
+        temperature=temperature,
+        max_tokens=max_tokens
+    )
+
+    return response['choices'][0]['message']['content'].strip()
