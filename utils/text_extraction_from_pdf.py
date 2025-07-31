@@ -1,4 +1,3 @@
-import tempfile
 import fitz
 import docx2txt
 import os
@@ -17,4 +16,3 @@ def text_extraction_from_pdf(pdf_path):
     except Exception as e:
         print(f"[Error] Failed to extract text from PDF: {e}")
         return ""
-
