@@ -1,7 +1,4 @@
 import fitz
-import docx2txt
-import os
-import io
 
 def text_extraction_from_pdf(pdf_path):
 
