@@ -6,9 +6,6 @@ load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def prompt_format(retrieved_chunks, genre):
-    """
-    Combine retrieved context and user-selected genre into a prompt.
-    """
     context = "\n".join(retrieved_chunks)
     prompt = (
         f"You are a creative storyteller.\n"
