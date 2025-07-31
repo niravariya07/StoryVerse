@@ -15,7 +15,7 @@ def prompt_format(retrieved_chunks, genre):
     )
     return prompt
 
-def generate_story(retrieved_chunks, genre, model="gpt-3.5-turbo", temperature=0.8, max_tokens=800):
+def story_generator_llm(retrieved_chunks, genre, model="gpt-3.5-turbo", temperature=0.8, max_tokens=800):
     """
     Use OpenAI's Chat API to generate a story.
 
