@@ -26,10 +26,8 @@ def chunk_text(text, max_words=100, overlap=20):
             current_chunk.extend(words)
             total_words += len(words)
         else:
-            # save current chunk
             chunks.append(' '.join(current_chunk))
 
-            # start new chunk with overlap
             if overlap > 0:
                 current_chunk = current_chunk[-overlap:]
                 total_words = len(current_chunk)
