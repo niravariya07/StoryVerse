@@ -40,7 +40,6 @@ def chunk_text(text, max_words=100, overlap=20):
             current_chunk.extend(words)
             total_words += len(words)
 
-    # Add any remaining words
     if current_chunk:
         chunks.append(' '.join(current_chunk))
 
