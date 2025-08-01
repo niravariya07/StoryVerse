@@ -23,19 +23,18 @@ if uploaded_file and genre:
             with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp_file:
                 tmp_file.write(uploaded_file.read())
                 tmp_path = tmp_file.name
+            extracted_text = text_extraction_from_pdf(tmp_path)
+            os.unlink(tmp_path)
 
-        extracted_text = text_extraction_from_pdf(tmp_path)
-        os.unlink(tmp_path)
-
-    if not extracted_text.strip():
-        st.error("Failed to extract text. Try with a different PDF.")
-    else:
+        if not extracted_text.strip():
+            st.error("Failed to extract text. Try with a different PDF.")
+        
         with st.spinner("Chunking and embedding text...."):
             chunks = chunk_text(extracted_text)
             embeddings = embed_text(chunks)
             faiss_index = build_faiss_index(embeddings, chunks)
 
-        with st.spinner("Retriving relevant chunks...."):
+        with st.spinner("Retrieving relevant chunks...."):
             retrieved_chunks = retrieve_similar_chunks(faiss_index, chunks, genre)
 
         with st.spinner("Generating story...."):
