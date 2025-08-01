@@ -46,7 +46,6 @@ if uploaded_file and genre:
         st.header("Your Story")
         st.write(story)
 
-        # Create download button
         story_bytes = story.encode("utf-8")
         st.download_button(
             label="📥 Download Story as .txt",
