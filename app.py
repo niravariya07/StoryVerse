@@ -6,7 +6,7 @@ from utils.chunks import chunk_text
 from utils.embeddings_ import embed_text
 from utils.retriever import retrieve_similar_chunks
 from utils.story_generator import story_generator_llm
-from utils.text_extraction_from_pdf import text_extraction_from_text
+from utils.text_extraction_from_pdf import text_extraction_from_pdf
 
 st.set_page_config(page_title="StoryVerse", layout="centered")
 st.title("StoryVerse - PDF to Story Generator")
@@ -24,7 +24,7 @@ if uploaded_file and genre:
                 tmp_file.write(uploaded_file.read())
                 tmp_path = tmp_file.name
 
-        extracted_text = text_extraction_from_text(tmp_path)
+        extracted_text = text_extraction_from_pdf(tmp_path)
         os.unlink(tmp_path)
 
     if not extracted_text.strip():
