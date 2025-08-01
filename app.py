@@ -4,7 +4,7 @@ import streamlit as st
 from utils.build_index import build_faiss_index
 from utils.chunks import chunk_text
 from utils.embeddings_ import embed_text
-from utils.retriever import retrieve_similar_chunks
+from utils.retriever import retrieve_similar_chunks, load_faiss_index
 from utils.story_generator import story_generator_llm
 from utils.text_extraction_from_pdf import text_extraction_from_pdf
 
@@ -19,7 +19,7 @@ genre = st.selectbox("Choose a genre",
 
 if uploaded_file and genre:
     if st.button("Generate Story"):
-        with st.spinner("Extracting text from PDF...."):
+        with st.spinner("Extracting text from PDF..."):
             with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp_file:
                 tmp_file.write(uploaded_file.read())
                 tmp_path = tmp_file.name
@@ -28,17 +28,29 @@ if uploaded_file and genre:
 
         if not extracted_text.strip():
             st.error("Failed to extract text. Try with a different PDF.")
-        
-        with st.spinner("Chunking and embedding text...."):
+            st.stop()
+
+        with st.spinner("Chunking and embedding text..."):
             chunks = chunk_text(extracted_text)
             embeddings = embed_text(chunks)
-            faiss_index = build_faiss_index(embeddings, chunks)
+            build_faiss_index(embeddings, chunks, index_path=genre)
 
-        with st.spinner("Retrieving relevant chunks...."):
-            retrieved_chunks = retrieve_similar_chunks(faiss_index, chunks, genre)
+        with st.spinner("Retrieving relevant chunks..."):
+            faiss_index, stored_chunks = load_faiss_index(index_path=genre)
+            retrieved_chunks = retrieve_similar_chunks(faiss_index, stored_chunks, genre)
 
-        with st.spinner("Generating story...."):
-            story = story_generator_llm(retrieved_chunks,genre)
-        st.success("Story generated")
+        with st.spinner("Generating story..."):
+            story = story_generator_llm(retrieved_chunks, genre)
+
+        st.success("Story generated!")
         st.header("Your Story")
         st.write(story)
+
+        # Create download button
+        story_bytes = story.encode("utf-8")
+        st.download_button(
+            label="📥 Download Story as .txt",
+            data=story_bytes,
+            file_name=f"{genre}_story.txt",
+            mime="text/plain"
+        )
