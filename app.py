@@ -41,3 +41,5 @@ if uploaded_file and genre:
         with st.spinner("Generating story...."):
             story = story_generator_llm(retrieved_chunks,genre)
         st.success("Story generated")
+        st.header("Your Story")
+        st.write(story)
