@@ -20,7 +20,7 @@ genre = st.selectbox("Choose a genre",
 if uploaded_file and genre:
     if st.button("Generate Story"):
         with st.spinner("Extracting text from PDF...."):
-            with tempfile.NamedTEmporaryFile(delete=False, suffix=".pdf") as tmp_file:
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp_file:
                 tmp_file.write(uploaded_file.read())
                 tmp_path = tmp_file.name
 
