@@ -12,6 +12,7 @@ def load_faiss_index(index_path="faiss_index"):
     return index, chunks
 
 def retrieve_similar_chunks(query, k=3, index_path="faiss_index"):
+    query, index, chunks, top_k=5
     index, chunks = load_faiss_index(index_path)
 
     query_embedding = model.encode([query])
