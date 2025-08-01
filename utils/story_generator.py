@@ -15,7 +15,7 @@ def prompt_format(retrieved_chunks, genre):
     )
     return prompt
 
-def story_generator_llm(retrieved_chunks, genre, model="gemini-pro", temperature=0.8):
+def story_generator_llm(retrieved_chunks, genre, model="gemini-2.0-flash", temperature=0.8):
     prompt = prompt_format(retrieved_chunks, genre)
 
     try:
