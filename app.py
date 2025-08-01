@@ -12,3 +12,12 @@ uploaded_file = st.file_uploader("Upload a PDF", type=["pdf"])
 genre = st.selectbox("Choose a genre",
                      ["Fantasy", "Sci-Fi", "Horror", "Romance", "Mystery", "Adventure", "Comedy", "Drama"])
 
+if uploaded_file and genre:
+    if st.button("Generate Story"):
+        with st.spinner("Extracting text from PDF...."):
+            with tempfile.NamedTEmporaryFile(delete=False, suffix=".pdf") as tmp_file:
+                tmp_file.write(uploaded_file.read())
+                tmp_path = tmp_file.name
+
+        extracted_text = text_extraction_from_text(tmp_path)
+        os.unlink(tmp_path)
