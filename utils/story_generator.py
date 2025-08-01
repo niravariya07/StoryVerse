@@ -1,9 +1,9 @@
 import os
-import openai
+from openai import OpenAI
 from dotenv import load_dotenv
 
 load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def prompt_format(retrieved_chunks, genre):
     context = "\n".join(retrieved_chunks)
@@ -18,7 +18,7 @@ def prompt_format(retrieved_chunks, genre):
 def story_generator_llm(retrieved_chunks, genre, model="gpt-3.5-turbo", temperature=0.8, max_tokens=800):
     prompt = prompt_format(retrieved_chunks, genre)
 
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model=model,
         messages=[
             {"role": "system", "content": "You are a helpful and creative assistant."},
@@ -28,4 +28,4 @@ def story_generator_llm(retrieved_chunks, genre, model="gpt-3.5-turbo", temperat
         max_tokens=max_tokens
     )
 
-    return response['choices'][0]['message']['content'].strip()
+    return response.choices[0].message.content.strip()
