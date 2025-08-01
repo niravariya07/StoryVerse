@@ -1,6 +1,9 @@
 import os
 import tempfile
 import streamlit as st
+from utils.build_index import build_faiss_index
+from utils.chunks import chunk_text
+from utils.embeddings_ import embed_text
 from utils.text_extraction_from_pdf import text_extraction_from_text
 
 st.set_page_config(page_title="StoryVerse", layout="centered")
@@ -21,3 +24,11 @@ if uploaded_file and genre:
 
         extracted_text = text_extraction_from_text(tmp_path)
         os.unlink(tmp_path)
+
+    if not extracted_text.strip():
+        st.error("Failed to extract text. Try with a different PDF.")
+    else:
+        with st.spinner("Chunking and embedding text...."):
+            chunks = chunk_text(extracted_text)
+            embeddings = embed_text(chunks)
+            faiss_index = build_faiss_index(embeddings, chunks)
