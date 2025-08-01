@@ -1,5 +1,5 @@
 import os
-from openai import OpenAI
+from openai import OpenAI, RateLimitError
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -17,15 +17,17 @@ def prompt_format(retrieved_chunks, genre):
 
 def story_generator_llm(retrieved_chunks, genre, model="gpt-3.5-turbo", temperature=0.8, max_tokens=800):
     prompt = prompt_format(retrieved_chunks, genre)
+    try:
+        response = client.chat.completions.create(
+            model=model,
+            messages=[
+                {"role": "system", "content": "You are a helpful and creative assistant."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=temperature,
+            max_tokens=max_tokens
+        )
 
-    response = client.chat.completions.create(
-        model=model,
-        messages=[
-            {"role": "system", "content": "You are a helpful and creative assistant."},
-            {"role": "user", "content": prompt}
-        ],
-        temperature=temperature,
-        max_tokens=max_tokens
-    )
-
-    return response.choices[0].message.content.strip()
+        return response.choices[0].message.content.strip()
+    except RateLimitError:
+        return "⚠️ Your OpenAI API quota has been exceeded. Please check your billing and usage settings."
