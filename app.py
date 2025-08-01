@@ -4,6 +4,8 @@ import streamlit as st
 from utils.build_index import build_faiss_index
 from utils.chunks import chunk_text
 from utils.embeddings_ import embed_text
+from utils.retriever import retrieve_similar_chunks
+from utils.story_generator import story_generator_llm
 from utils.text_extraction_from_pdf import text_extraction_from_text
 
 st.set_page_config(page_title="StoryVerse", layout="centered")
@@ -32,3 +34,10 @@ if uploaded_file and genre:
             chunks = chunk_text(extracted_text)
             embeddings = embed_text(chunks)
             faiss_index = build_faiss_index(embeddings, chunks)
+
+        with st.spinner("Retriving relevant chunks...."):
+            retrieved_chunks = retrieve_similar_chunks(faiss_index, chunks, genre)
+
+        with st.spinner("Generating story...."):
+            story = story_generator_llm(retrieved_chunks,genre)
+        st.success("Story generated")
