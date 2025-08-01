@@ -1,7 +1,7 @@
 from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer
 
-def chunk_text(text, model_name="all-MiniLM-L6-v2", max_tokens=512, overlap=50):
+def chunk_text(text, model_name="sentence-transformers/all-MiniLM-L6-v2", max_tokens=512, overlap=50):
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     tokens = tokenizer.encode(text, add_special_tokens=False)
 
