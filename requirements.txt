@@ -8,3 +8,4 @@ langchain
 google-generativeai
 pandas
 numpy
+PyMuPDF
