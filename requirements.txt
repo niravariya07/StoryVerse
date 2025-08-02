@@ -2,6 +2,7 @@ streamlit
 fitz
 faiss-cpu
 sentence-transformers
+dotenv
 openai
 langchain
 google-generativeai
