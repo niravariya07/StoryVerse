@@ -11,9 +11,7 @@ def load_faiss_index(index_path="faiss_index"):
         chunks = pickle.load(f)
     return index, chunks
 
-def retrieve_similar_chunks(query, k=3, index_path="faiss_index"):
-    index, chunks = load_faiss_index(index_path)
-
+def retrieve_similar_chunks(query, index, chunks, k=3):
     query_embedding = model.encode([query])
     query_embedding = np.array(query_embedding).astype("float32")
 
