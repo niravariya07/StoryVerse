@@ -38,7 +38,7 @@ if uploaded_file and genre:
 
         with st.spinner("Retrieving relevant chunks..."):
             faiss_index, stored_chunks = load_faiss_index(index_path=index_folder)
-            retrieved_chunks = retrieve_similar_chunks(index_folder)
+            retrieved_chunks = retrieve_similar_chunks(genre, faiss_index, stored_chunks)
 
         with st.spinner("Generating story..."):
             story = story_generator_llm(retrieved_chunks, genre)
