@@ -33,11 +33,12 @@ if uploaded_file and genre:
         with st.spinner("Chunking and embedding text..."):
             chunks = chunk_text(extracted_text)
             embeddings = embed_text(chunks)
-            build_faiss_index(embeddings, chunks, index_path=genre)
+            index_folder = f"indexes/{genre}"
+            build_faiss_index(embeddings, chunks, index_path=index_folder)
 
         with st.spinner("Retrieving relevant chunks..."):
-            faiss_index, stored_chunks = load_faiss_index(index_path=genre)
-            retrieved_chunks = retrieve_similar_chunks(genre)
+            faiss_index, stored_chunks = load_faiss_index(index_path=index_folder)
+            retrieved_chunks = retrieve_similar_chunks(index_folder)
 
         with st.spinner("Generating story..."):
             story = story_generator_llm(retrieved_chunks, genre)
