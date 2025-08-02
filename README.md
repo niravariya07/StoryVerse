@@ -39,3 +39,16 @@
 
 ## 📂 Project Structure
 
+        StoryVerse/
+        ├── app.py # Main Streamlit app
+        ├── utils/
+        │ ├── build_index.py # FAISS index builder
+        │ ├── chunks.py # Text chunking
+        │ ├── embeddings_.py # Embedding functions
+        │ ├── retriever.py # Chunk retriever
+        │ ├── story_generator.py # LLM-based story generator
+        │ └── text_extraction_from_pdf.py # PDF text extractor
+        ├── genre_stories/ # Stores saved/generated stories
+        ├── faiss_index/ # FAISS index files
+        ├── requirements.txt # Project dependencies
+        └── .gitignore # Ignore files for Git
