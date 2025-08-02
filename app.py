@@ -47,6 +47,12 @@ if uploaded_file and genre:
         st.header("Your Story")
         st.write(story)
 
+        story_dir = os.path.join("generated_stories", genre)
+        os.makedirs(story_dir, exist_ok=True)
+        story_path = os.path.join(story_dir, "generated_story.txt")
+        with open(story_path, "w", encoding="utf-8") as f:
+            f.write(story)
+
         story_bytes = story.encode("utf-8")
         st.download_button(
             label="📥 Download Story as .txt",
