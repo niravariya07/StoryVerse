@@ -7,3 +7,9 @@ __pycache__/
 
 # Jupyter notebooks
 .ipynb_checkpoints
+
+# FAISS index or other model-generated artifacts
+*.faiss
+*.index
+*.pkl
+*.npz
