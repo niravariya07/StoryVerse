@@ -1,4 +1,4 @@
-# 📖 StoryVerse - PDF to Story Generator
+# StoryVerse - PDF to Story Generator
 
 **StoryVerse** is an AI-powered storytelling app that transforms your uploaded PDFs into creative stories across genres like **Fantasy**, **Sci-Fi**, **Romance**, **Mystery**, and more — all in a few clicks!
 
@@ -6,7 +6,7 @@
 
 ---
 
-## ✨ Features
+##  Features
 
 - 📄 Upload any **PDF** – extract meaningful text effortlessly  
 - 🧠 **AI-Powered Storytelling** – generate engaging stories using modern NLP techniques  
@@ -16,7 +16,7 @@
 
 ---
 
-## 🚀 How It Works
+## How It Works
 
 1. **Upload a PDF**  
 2. **Text is extracted** from your file using PyMuPDF  
@@ -27,7 +27,7 @@
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Frontend**: [Streamlit](https://streamlit.io/)  
 - **Embeddings**: [SentenceTransformers](https://www.sbert.net/)  
@@ -37,7 +37,7 @@
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
         StoryVerse/
         ├── app.py # Main Streamlit app
