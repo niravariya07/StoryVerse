@@ -21,3 +21,7 @@ __pycache__/
 
 # environment variables
 .env
+
+# Ignore story and index folders
+generated_stories/
+indexes/
