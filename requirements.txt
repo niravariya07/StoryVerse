@@ -1,5 +1,5 @@
 streamlit
-fitz
+PyMuPDF
 faiss-cpu
 sentence-transformers
 dotenv
@@ -8,4 +8,3 @@ langchain
 google-generativeai
 pandas
 numpy
-PyMuPDF
