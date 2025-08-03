@@ -7,6 +7,7 @@ from utils.embeddings_ import embed_text
 from utils.retriever import retrieve_similar_chunks, load_faiss_index
 from utils.story_generator import story_generator_llm
 from utils.text_extraction_from_pdf import text_extraction_from_pdf
+from utils.auth import get_openai_api_key
 
 st.set_page_config(page_title="StoryVerse", layout="centered")
 st.title("StoryVerse - PDF to Story Generator")
