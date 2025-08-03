@@ -19,4 +19,20 @@ def get_openai_api_key(max_fallback_uses: int = 5) -> str:
         
         if "fallback_count" not in st.session_state:
             st.session_state["fallback_count"] = 0
-        if st.session_state["fallback_count"] >= max_fall
+        if st.session_state["fallback_count"] >= max_fallback_uses:
+            st.error("🚫 Demo limit reached. Please provide your own API key to continue.")
+            st.stop()
+        else:
+            st.session_state["fallback_count"] += 1
+
+    # Validate key
+    try:
+        openai.api_key = api_key
+        openai.Model.list()  # lightweight API check
+    except Exception as e:
+        st.error("❌ Invalid or unauthorized API key. Please check and try again.")
+        st.stop()
+
+    # Save and return
+    st.session_state["api_key"] = api_key
+    return api_key
