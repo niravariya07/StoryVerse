@@ -1,6 +1,7 @@
 import os
 import tempfile
 import streamlit as st
+from utils.auth import get_openai_api_key
 from utils.build_index import build_faiss_index
 from utils.chunks import chunk_text
 from utils.embeddings_ import embed_text
