@@ -6,7 +6,7 @@ load_dotenv()
 
 def get_openai_api_key():
     if "openai_api_key" in st.session_state and st.session_state.openai_api_key:
-        os.environ["OPENAI_API_KEY"] = st.session_state.openai_api_key
+        os.environ["GEMINI_API_KEY"] = st.session_state.openai_api_key
         return
 
     st.info("🔑 Enter your OpenAI API key or use a limited default key provided by the app.")
@@ -15,15 +15,15 @@ def get_openai_api_key():
 
     if api_key_input:
         st.session_state.openai_api_key = api_key_input
-        os.environ["OPENAI_API_KEY"] = api_key_input
+        os.environ["GEMINI_API_KEY"] = api_key_input
         st.success("✅ API key set successfully.")
         st.rerun()
 
     elif use_default:
-        default_key = os.getenv("OPENAI_API_KEY")
+        default_key = os.getenv("GEMINI_API_KEY")
         if default_key:
             st.session_state.openai_api_key = default_key
-            os.environ["OPENAI_API_KEY"] = default_key
+            os.environ["GEMINI_API_KEY"] = default_key
             st.success("✅ Using default API key.")
             st.rerun()
         else:
